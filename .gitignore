@@ -1,0 +1,3 @@
+# local gitignore to supliment the global gitignore
+inventory.db
+backup.csv
