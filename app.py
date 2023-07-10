@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from db.database import Session
-from db.models import Brand, Product
+from db.database import engine, Session
+from db.models import Base, Brand, Product
 from data import brands_csv, inventory_csv
 from helpers import clean_price, clean_date, clean_quantity
 
@@ -43,6 +43,30 @@ def add_products():
     session.commit()
 
 
+def main_menu():
+    print('''
+    \rPlease select one of the following options:\n
+    V - View a single product's inventory
+    N - Add a new product to the database
+    A - View an analysis of the inventory
+    B - Make a backup of the entire inventory
+    ''')
+    user_input = input('Enter your choice: ').lower()
+    if user_input == 'v':
+        print('View a single product')
+    elif user_input == 'n':
+        print('Add a new product')
+    elif user_input == 'a':
+        print('View an analysis')
+    elif user_input == 'b':
+        print('Make a backup')
+    else:
+        print(f'\n{user_input} is not a valid option. Please try again.')
+        main_menu()
+
+
 if __name__ == '__main__':
+    Base.metadata.create_all(bind=engine)
     add_brands()
     add_products()
+    main_menu()
