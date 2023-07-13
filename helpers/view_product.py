@@ -1,3 +1,4 @@
+from helpers.delete_product import delete_product
 from helpers.edit_product import edit_product
 
 
@@ -36,7 +37,7 @@ def view_product(session, product_model, brand_model, menu):
             edit_product(session, product, usd_price, menu)
             break
         elif user_input == 'd':
-            print('Delete this product')
+            delete_product(session, product, menu)
         elif user_input == 'q':
             menu()
             break
