@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from db.database import engine, Session
+from db.database import engine, Session, inspect
 from db.models import Base, Brand, Product
 from data import brands_csv, inventory_csv
 from helpers import (clean_price, clean_date,
@@ -52,26 +52,34 @@ def main_menu():
     \r N - Add a new product to the database
     \r A - View an analysis of the inventory
     \r B - Make a backup of the entire inventory
-    \r Q - Quit
+    \r Q - Quit the application
     ''')
-    user_input = input('Enter your choice: ').lower()
-    if user_input == 'v':
-        view_product(session, Product, Brand, main_menu)
-    elif user_input == 'n':
-        print('Add a new product')
-    elif user_input == 'a':
-        print('View an analysis')
-    elif user_input == 'b':
-        print('Make a backup')
-    elif user_input == 'q':
-        print('Goodbye!')
-    else:
-        print(f'\n{user_input} is not a valid option. Please try again.')
-        main_menu()
+    while True:
+        user_input = input('Enter your choice: ').lower()
+        match user_input:
+            case 'v':
+                cls()
+                view_product(session, Product, Brand, main_menu)
+                break
+            case 'n':
+                print('Add a new product')
+                break
+            case 'a':
+                print('View an analysis')
+                break
+            case 'b':
+                print('Make a backup')
+                break
+            case 'q':
+                print('Goodbye!')
+                break
+            case _:
+                print(f'{user_input} was not a valid option.\n')
 
 
 if __name__ == '__main__':
-    Base.metadata.create_all(bind=engine)
-    add_brands()
-    add_products()
+    if inspect(engine).get_table_names() == []:
+        Base.metadata.create_all(bind=engine)
+        add_brands()
+        add_products()
     main_menu()
