@@ -2,10 +2,13 @@ from helpers.delete_product import delete_product
 from helpers.edit_product import edit_product
 
 
-def view_product(session, product_model, brand_model, menu):
+def view_product(session, product_model, brand_model, menu, search_id):
     print('\n- View a single product\'s inventory -\n')
     while True:
-        product_id = input('Enter the product ID: ')
+        if search_id:
+            product_id = search_id
+        else:
+            product_id = input('Enter the product ID: ')
         product = session.query(product_model).filter(
             product_model.product_id == product_id).one_or_none()
         if product:
@@ -38,6 +41,7 @@ def view_product(session, product_model, brand_model, menu):
             break
         elif user_input == 'd':
             delete_product(session, product, menu)
+            break
         elif user_input == 'q':
             menu()
             break

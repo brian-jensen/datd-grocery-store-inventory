@@ -4,7 +4,8 @@ from db.database import engine, Session, inspect
 from db.models import Base, Brand, Product
 from data import brands_csv, inventory_csv
 from helpers import (clean_price, clean_date,
-                     clean_quantity, view_product, cls)
+                     clean_quantity, search_products,
+                     add_product, cls)
 
 session = Session()
 
@@ -59,10 +60,11 @@ def main_menu():
         match user_input:
             case 'v':
                 cls()
-                view_product(session, Product, Brand, main_menu)
+                search_products(session, Product, Brand, main_menu)
                 break
             case 'n':
-                print('Add a new product')
+                cls()
+                add_product(session, Product, Brand, main_menu, datetime)
                 break
             case 'a':
                 print('View an analysis')
