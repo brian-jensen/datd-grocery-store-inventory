@@ -1,15 +1,15 @@
 from helpers.view_product import view_product
 
 
-def handle_search(session, product_model, brand_model, menu):
+def handle_search(session, product, brand, menu):
     while True:
         search = input('Enter the product name (e.g. "beans"): ')
-        name_search = session.query(product_model).filter(
-            product_model.product_name.ilike(f'%{search}%')).all()
+        name_search = session.query(product).filter(
+            product.product_name.ilike(f'%{search}%')).all()
         if name_search:
             if len(name_search) == 1:
                 print()
-                view_product(session, product_model, brand_model,
+                view_product(session, product, brand,
                              menu, name_search[0].product_id)
                 break
             elif len(name_search) > 1:
@@ -21,8 +21,8 @@ def handle_search(session, product_model, brand_model, menu):
                   \r Product Name: {product.product_name}
                   \r Product ID: {product.product_id}
                   \r {border}''')
-                view_product(session, product_model,
-                             brand_model, menu, None)
+                view_product(session, product,
+                             brand, menu, None)
                 break
         else:
             print(f'No results found for "{search}".\n')

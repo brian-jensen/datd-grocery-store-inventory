@@ -1,7 +1,10 @@
+MENU_TEXT = '\nPress ENTER to return to the main menu...'
+
+
 def delete_product(session, product, menu):
-    MENU_TEXT = '\nPress ENTER to return to the main menu...'
     while True:
-        confirm = input(f'Delete "{product.product_name}"? (y/n): ').lower()
+        confirm = input(
+            f'Delete "{product.product_name}"? (y/n): ').lower()
         if confirm == 'y':
             session.delete(product)
             session.commit()
