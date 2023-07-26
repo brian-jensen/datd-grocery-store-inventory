@@ -6,9 +6,11 @@ from .view_product import view_product
 from .edit_product import edit_product
 from .delete_product import delete_product
 from .add_product import add_product
+from .analyze_data import analyze_data
 from .cls import cls
 
 __all__ = ['clean_price', "clean_date",
            "clean_quantity", "search_products",
            "view_product", "edit_product",
-           "delete_product", "add_product", "cls"]
+           "delete_product", "add_product",
+           "analyze_data", "cls"]

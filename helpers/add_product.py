@@ -26,6 +26,8 @@ def add_product(session, product_model, brand_model, main_menu, datetime):
         elif choice == '2':
             add_product(session, product_model,
                         brand_model, main_menu, datetime)
+        elif choice == '3':
+            main_menu()
     else:
         product_quantity = input(PRODUCT_QUANTITY_PROMPT)
         while not product_quantity.replace(',', '').isdigit():

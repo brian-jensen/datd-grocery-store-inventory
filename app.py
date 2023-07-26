@@ -5,7 +5,7 @@ from db.models import Base, Brand, Product
 from data import brands_csv, inventory_csv
 from helpers import (clean_price, clean_date,
                      clean_quantity, search_products,
-                     add_product, cls)
+                     add_product, analyze_data, cls)
 
 session = Session()
 
@@ -67,7 +67,8 @@ def main_menu():
                 add_product(session, Product, Brand, main_menu, datetime)
                 break
             case 'a':
-                print('View an analysis')
+                cls()
+                analyze_data(session, Product, Brand, main_menu)
                 break
             case 'b':
                 print('Make a backup')
