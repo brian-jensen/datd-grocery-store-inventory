@@ -1,3 +1,4 @@
 # local gitignore to supliment the global gitignore
 inventory.db
-backup.csv
+backup_brands.csv
+backup_inventory.csv

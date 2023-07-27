@@ -72,7 +72,7 @@ def main_menu():
                 analyze_data(session, Product, Brand, main_menu)
                 break
             case 'b':
-                backup_data(session, Product, Brand, main_menu, datetime)
+                backup_data(session, Product, Brand, main_menu)
                 break
             case 'q':
                 print('Goodbye!')

@@ -2,18 +2,18 @@ from helpers.delete_product import delete_product
 from helpers.edit_product import edit_product
 
 
-def view_product(session, product, brand, menu, search_id):
+def view_product(session, product_model, brand_model, menu, search_id):
     print('\n- View a single product\'s inventory -\n')
     while True:
         if search_id:
             product_id = search_id
         else:
             product_id = input('Enter the product ID: ')
-        product = session.query(product).filter(
-            product.product_id == product_id).one_or_none()
+        product = session.query(product_model).filter(
+            product_model.product_id == product_id).one_or_none()
         if product:
-            brand = session.query(brand).filter(
-                brand.brand_id == product.brand_id).one_or_none()
+            brand = session.query(brand_model).filter(
+                brand_model.brand_id == product.brand_id).one_or_none()
             usa_date = product.date_updated.strftime('%B %d, %Y')
             usd_price = float(product.product_price / 100)
             border = '-' * 50
